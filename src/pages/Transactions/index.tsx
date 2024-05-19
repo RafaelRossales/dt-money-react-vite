@@ -1,35 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Header } from "../../components/Header";
 import Summary from "../../components/Summary";
 import { SearchForm } from "./components/SearchForm";
-import { PriceHighlight, TransactionTable, TransactionsContainer } from "./styles";
-const URL:string = import.meta.env.VITE_API_URL;
-
-interface ITransaction{
-    id:number;
-    description:string;
-    type:'income' | 'outcome';
-    price:number;
-    category:string;
-    createdAt:string
-}
+import { TransactionTable, TransactionsContainer } from "./styles";
+import TransactionContext from "../../contexts/TransactionContext";
 
 
 export function Transaction(){
-
-    const [transactions,setTransactions ]= useState<ITransaction[]>([]);
-
-
-    async function loadTransaction(){
-        const response = await fetch(`${URL}/transactions`)
-        const data = await response.json()
-        setTransactions(data)
-    }
-
-    useEffect(()=>{
-        loadTransaction()
-    },[])
-
+    const { transactions } = useContext(TransactionContext)
 
     return(
         <div>
