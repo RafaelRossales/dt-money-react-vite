@@ -1,0 +1,262 @@
+
+
+// ReactDOM.createRoot(document.getElementById('root')!).render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+// )
+
+
+// using System;
+
+// // public class MegaStore
+// // {
+// //     public enum DiscountType
+// //     {
+// //         Standard,
+// //         Seasonal,
+// //         Weight
+// //     }
+  
+// //     public static double GetDiscountedPrice(double cartWeight, 
+// //                                             double totalPrice, 
+// //                                             DiscountType discountType)
+// //     {
+// //         if(cartWeight <= 10){
+// //             var porcentage = totalPrice / 0.18;
+// //             return totalPrice - porcentage;
+// //         }else if(){
+            
+// //         }else{
+// //             var porcentage = totalPrice / 0.06;
+// //         }
+        
+// //         return 0.0;
+// //     }
+    
+// //     public static void Main(string[] args)
+// //     {
+// //         Console.WriteLine(GetDiscountedPrice(12, 100, DiscountType.Weight));
+// //     }
+// // }
+
+// import React from 'react';
+// import { createRoot } from 'react-dom/client';
+
+// const Message = () => {  
+  
+//   const [isVisible, setIsVisible] = React.useState(false);
+
+//   const handleClick = () => {
+//     setIsVisible(!isVisible);
+//   };
+  
+//   return (
+//     <React.Fragment>
+//       <a href="#" onClick={handleClick}>Want to buy a new car?</a>
+//       {isVisible && <p>Call +11 22 33 44 now!</p>}
+//     </React.Fragment>
+//   );
+// }
+
+// document.body.innerHTML = "<div id='root'></div>";
+// const root = createRoot(document.getElementById("root"));
+
+// root.render(<Message />);
+// const rootElement = document.getElementById("root");
+// setTimeout(() => {
+//   console.log("Before click: " + rootElement.innerHTML);
+//   setTimeout(() => {
+//     rootElement.querySelector('a').click();
+//     console.log("After click: " + rootElement.innerHTML);
+//     setTimeout(() => {
+//       rootElement.querySelector('a').click();
+//       console.log("After second click: " + rootElement.innerHTML);
+//     });
+//   });
+// });
+
+
+// At the start paragraph should not be rendered
+// After a click the paragraph should be rendered
+// After a second click the paragraph should be hidden
+
+
+
+
+
+// import React from 'react';
+// import { createRoot } from 'react-dom/client';
+
+// const TodoItem = (props) => <li onClick={props.onClick}>{props.item.text}</li>
+
+// const TodoList = ({ items, onListClick, onItemClick }) => {
+//   const handleItemClick = (item, event) => {
+//     if(!item.done){
+//       onItemClick(item, event)
+//     }else{
+      
+//       event.stopPropagation(onItemClick);
+//     }
+//   };
+
+//   return (
+//     <ul onClick={onListClick}>
+//       {items.map((item, index) => 
+//         <TodoItem item={item} key={index} onClick={(event) => handleItemClick(item, event)}/>)}
+//     </ul>
+//   );
+// }
+
+// const items = [ { text: 'Buy grocery', done: true },
+//   { text: 'Play guitar', done: false },
+//   { text: 'Romantic dinner', done: false }
+// ];
+
+// const App = (props) => <TodoList
+//   items={props.items}
+//   onListClick={(event) => console.log("List clicked!")}
+//   onItemClick={(item, event) => { console.log(item, event) }}
+// />;
+
+// document.body.innerHTML = "<div id='root'></div>";
+// const root = createRoot(document.getElementById("root"));
+
+// root.render(<App items={items}/>);
+
+
+import React, { useEffect } from "react";
+import ReactDOM from 'react-dom/client'
+
+// function CharacterAttributes({totalPoints}) {
+  
+//   const  [remainingPoints, setRemainingPoints] = React.useState(0);
+//   const  [min, setMin] = React.useState(0)
+  
+//   const healthHandler = (e) => {
+    
+//     let v = parseInt(e.target.value);
+    
+//     setRemainingPoints(()=> (totalPoints - v) * 0.07)
+//   }
+  
+//   const staminaHandler = (e) => {
+        
+//     let v = parseInt(e.target.value);
+    
+//     setRemainingPoints(()=> (totalPoints - v) * 0.07)
+//   }
+  
+    
+//   const speedHandler = (e) => {
+        
+//     let v = parseInt(e.target.value);
+    
+//     setRemainingPoints(()=> (totalPoints - v) * 0.07)
+//   }
+  
+  
+ 
+  
+//   return (
+//     <div>
+//     Character stats: <span id="points">{remainingPoints}</span> points left.
+//     <div>
+//       <input type="range" id="health" onChange={healthHandler} min={min} max={totalPoints} value="0" step="1" />Health
+//     </div>
+//     <div>
+//       <input type="range" id="stamina" onChange={staminaHandler} min={min} max={totalPoints} value="0" step="1" />Stamina
+//     </div>
+//     <div>
+//       <input type="range" id="speed" onChange={speedHandler} min={min} max={totalPoints} value="0" step="1" />Speed
+//     </div>
+//   </div>
+//   );
+// }
+
+// document.body.innerHTML = "<div id='root'></div>";
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<CharacterAttributes totalPoints={15} />);
+
+
+const initialState = [
+  {
+    id: 1,
+    title: "Todo 1",
+    complete: false,
+  },
+  {
+    id: 2,
+    title: "Todo 2",
+    complete: false,
+  },
+]
+
+
+const  reducer = (state, action) =>{
+  switch(action.type){
+    case "COMPLETE":
+       return state.map((item)=>{
+        if(item.id === action.id){
+          return{
+           ...item,
+            complete:!item.complete
+          }
+        }else{
+          return item;
+        }
+       });
+    case "REMOVE":
+      return state.filter((item) => item.id!== action.id);
+    default:
+      return state;
+  }
+}
+
+
+function Todos(){
+
+  const[todos, dispatch] = React.useReducer(reducer, initialState);
+  const [counter, setCounter ] = React.useState(0);
+
+  const handleTodoList = (todo) =>{
+    dispatch({
+      type: "COMPLETE",
+      id:todo.id
+    });
+  }
+
+  const handleRemoveItem = (todo) =>{
+    dispatch({
+      type: "REMOVE",
+      id:todo.id
+    });
+  }
+
+
+  return(
+    <>
+    <div>
+      <h1>Counter: {counter}</h1>
+        <button onClick={() => setCounter(counter + 1)}>Increment</button>
+    </div>
+    <br/>
+       {todos.map((todo) => (
+        <div key={todo.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleTodoList(todo)}
+            />
+            {todo.title}
+          </label>
+           <button onClick={() => handleRemoveItem(todo)}>Remove</button>
+        </div>
+      ))}
+    </>
+  )
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Todos />);
