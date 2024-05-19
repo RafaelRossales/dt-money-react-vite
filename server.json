@@ -8,7 +8,7 @@
             "description":"Desenvolvimento de sites",
             "price":100,
             "type":"income",
-            "category":"venda",
+            "category":"Entrada",
             "createdAt":"2022-07-29T19:36:44.505Z"
         },
         {
@@ -16,7 +16,7 @@
             "description":"Amburguer",
             "price":50,
             "type":"outcome",
-            "category":"venda",
+            "category":"Saída",
             "createdAt":"2022-07-29T19:36:44.505Z"
         },
         {
@@ -24,7 +24,7 @@
             "description":"Luminaria",
             "price":150,
             "type":"income",
-            "category":"Conta",
+            "category":"Entrada",
             "createdAt":"2022-07-29T19:36:44.505Z"
         }
     ]
