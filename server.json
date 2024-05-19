@@ -1,0 +1,23 @@
+{
+    "info":{
+        "description":"API"
+    },
+    "transactions":[
+        {
+            "id":1,
+            "description":"Desenvolvimento de sites",
+            "price":100,
+            "type":"income",
+            "category":"venda",
+            "createdAt":"2022-07-29T19:36:44.505Z"
+        },
+        {
+            "id":2,
+            "description":"Amburguer",
+            "price":50,
+            "type":"outcome",
+            "category":"venda",
+            "createdAt":"2022-07-29T19:36:44.505Z"
+        }
+    ]
+}
