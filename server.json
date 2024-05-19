@@ -18,6 +18,14 @@
             "type":"outcome",
             "category":"venda",
             "createdAt":"2022-07-29T19:36:44.505Z"
+        },
+        {
+            "id":3,
+            "description":"Luminaria",
+            "price":150,
+            "type":"income",
+            "category":"Conta",
+            "createdAt":"2022-07-29T19:36:44.505Z"
         }
     ]
 }
